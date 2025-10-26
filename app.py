@@ -2,6 +2,7 @@
 # ... (Keep all imports and other functions the same) ...
 
 # --- Decorator for Protected Routes (MODIFIED) ---
+app = Flask(__name__)
 from functools import wraps
 
 def login_required_and_check(f):
