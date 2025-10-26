@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+     <style>
+        /* ... (styles remain the same) ... */
+        .info { color: blue; }
+    </style>
+</head>
+<body>
+    <h1>📈 Welcome, {{ username }}!</h1>
+    <p>This is your secure dashboard.</p>
+    <p class="info">Your activity in this session is being monitored for anomalies.</p> <hr>
+    <h2>Your Secure Session Details</h2>
+    <hr>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>

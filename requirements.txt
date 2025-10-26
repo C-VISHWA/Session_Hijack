@@ -1,0 +1,6 @@
+# requirements.txt
+Flask
+pandas
+scikit-learn
+gunicorn
+# Add any other specific versions if needed

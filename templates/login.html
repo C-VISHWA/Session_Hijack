@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Secure Login</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .error { color: red; }
+        .success { color: green; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        input[type="text"], input[type="password"] { width: 250px; padding: 8px; }
+        button { padding: 10px 15px; }
+        .controls { background-color: #f0f0f0; padding: 15px; margin-bottom: 20px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1>🔒 Secure Login</h1>
+
+    <div class="controls">
+        <h3>🧪 Developer Controls (Simulate User Type)</h3>
+        <form method="post" action="{{ url_for('login') }}">
+             <input type="hidden" name="simulation_change" value="true">
+            <select name="simulated_user_type" onchange="this.form.submit()">
+                <option value="Normal User (NY)" {% if simulated_user_type == 'Normal User (NY)' %}selected{% endif %}>Normal User (NY)</option>
+                <option value="Normal User (London)" {% if simulated_user_type == 'Normal User (London)' %}selected{% endif %}>Normal User (London)</option>
+                <option value="Anomalous Bot (404)" {% if simulated_user_type == 'Anomalous Bot (404)' %}selected{% endif %}>Anomalous Bot (404)</option>
+                <option value="Anomalous POST" {% if simulated_user_type == 'Anomalous POST' %}selected{% endif %}>Anomalous POST</option>
+            </select>
+            <p><small>Changing this will refresh the page.</small></p>
+        </form>
+         <p>Current Simulation: <strong>{{ simulated_user_type }}</strong></p>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="post" action="{{ url_for('login') }}">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <input type="hidden" name="simulated_user_type" value="{{ simulated_user_type }}">
+        <button type="submit">Login</button>
+    </form>
+
+    <hr>
+    <p><strong>Demo Credentials:</strong><br>
+       User: <code>admin</code>, Pass: <code>password123</code><br>
+       User: <code>user</code>, Pass: <code>streamlit</code>
+    </p>
+
+</body>
+</html>
